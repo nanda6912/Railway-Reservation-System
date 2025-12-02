@@ -71,9 +71,9 @@ Railway-Reservation-System/
 └── README.md
 
 🛠️ Tech Stack
-Technology	Purpose
-Java (Core Java)	Application logic
-OOP	Classes, objects, methods
-Arrays	Seat allocation, passenger storage
-Scanner API	User input
-Menu-driven console UI	Interaction
+Technology	  ------- ----------------- Purpose
+Java (Core Java)	----------------------Application logic
+OOP	-------------------------------------Classes, objects, methods
+Arrays	--------------------------------Seat allocation, passenger storage
+Scanner API----------------------------	User input
+Menu-driven console ---------------------UI	Interaction
