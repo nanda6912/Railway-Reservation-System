@@ -1,0 +1,195 @@
+import java.util.Scanner;
+
+public class RailwayReservationSystem {
+
+    // Helper method to find a train by its number
+    private static Train findTrainByNumber(Train[] trains, int trainNumber) {
+        for (Train t : trains) {
+            if (t.getTrainNumber() == trainNumber) {
+                return t;
+            }
+        }
+        return null;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        // Predefined trains (trainNumber, name, totalSeats, farePerSeat)
+        Train[] trains = new Train[3];
+        trains[0] = new Train(101, "Chennai Express", 10, 200.0);
+        trains[1] = new Train(202, "Delhi Superfast", 8, 300.0);
+        trains[2] = new Train(303, "Mumbai Local", 12, 100.0);
+
+        int choice;
+        do {
+            System.out.println("\n===== Railway Reservation System =====");
+            System.out.println("1. View Trains and Seat Availability");
+            System.out.println("2. Book Ticket(s)");
+            System.out.println("3. Cancel Ticket");
+            System.out.println("4. View Passenger List for a Train");
+            System.out.println("5. Exit");
+            System.out.print("Enter your choice: ");
+
+            // Basic validation: ensure user enters an integer
+            while (!sc.hasNextInt()) {
+                System.out.println("Invalid input! Please enter a number between 1 and 5.");
+                System.out.print("Enter your choice: ");
+                sc.next(); // discard invalid input
+            }
+            choice = sc.nextInt();
+
+            switch (choice) {
+                case 1:
+                    System.out.println("\n--- Train Details & Seat Availability ---");
+                    for (Train t : trains) {
+                        System.out.println(t.toString());
+                    }
+                    System.out.println("\nEnter train number to view detailed seat status, or 0 to go back:");
+                    int trainNumForDetails = sc.nextInt();
+                    if (trainNumForDetails != 0) {
+                        Train selectedTrain = findTrainByNumber(trains, trainNumForDetails);
+                        if (selectedTrain != null) {
+                            selectedTrain.showSeatAvailability();
+                        } else {
+                            System.out.println("Train not found!");
+                        }
+                    }
+                    break;
+
+                case 2:
+                    System.out.println("\n--- Book Ticket(s) ---");
+                    System.out.print("Enter train number: ");
+                    int trainNumForBooking = sc.nextInt();
+                    Train trainToBook = findTrainByNumber(trains, trainNumForBooking);
+                    if (trainToBook == null) {
+                        System.out.println("Invalid train number!");
+                        break;
+                    }
+
+                    System.out.println("You selected: " + trainToBook.getTrainName() +
+                                       " (Train " + trainToBook.getTrainNumber() + ")");
+                    System.out.println("Fare per seat: Rs." + trainToBook.getFarePerSeat());
+
+                    System.out.print("How many seats do you want to book? ");
+                    int seatCount = sc.nextInt();
+
+                    if (seatCount <= 0) {
+                        System.out.println("Seat count must be at least 1.");
+                        break;
+                    }
+
+                    if (seatCount > trainToBook.getAvailableSeatCount()) {
+                        System.out.println("Only " + trainToBook.getAvailableSeatCount() +
+                                           " seats are available. Try a smaller number.");
+                        break;
+                    }
+
+                    int successfulBookings = 0;
+
+                    // Loop for each passenger
+                    for (int i = 1; i <= seatCount; i++) {
+                        System.out.println("\nPassenger " + i + ":");
+
+                        System.out.print("Enter passenger name: ");
+                        sc.nextLine();  // consume leftover newline
+                        String passengerName = sc.nextLine();
+
+                        System.out.print("Enter age: ");
+                        int age = sc.nextInt();
+
+                        System.out.println("Choose berth position (or 0 for auto allocation):");
+                        System.out.println("1. Lower Berth");
+                        System.out.println("2. Middle Berth");
+                        System.out.println("3. Upper Berth");
+                        System.out.println("4. Side Lower Berth");
+                        System.out.println("5. Side Upper Berth");
+                        System.out.print("Enter choice (0-5): ");
+                        int berthChoice = sc.nextInt();
+
+                        String preferredBerth = null;
+                        boolean autoAssignBerth = false;
+
+                        switch (berthChoice) {
+                            case 1:
+                                preferredBerth = "Lower Berth";
+                                break;
+                            case 2:
+                                preferredBerth = "Middle Berth";
+                                break;
+                            case 3:
+                                preferredBerth = "Upper Berth";
+                                break;
+                            case 4:
+                                preferredBerth = "Side Lower Berth";
+                                break;
+                            case 5:
+                                preferredBerth = "Side Upper Berth";
+                                break;
+                            case 0:
+                                autoAssignBerth = true;
+                                break;
+                            default:
+                                System.out.println("Invalid berth choice! Auto-assigning based on age.");
+                                autoAssignBerth = true;
+                        }
+
+                        System.out.print("Enter seat number for this passenger (1 to " +
+                                         trainToBook.getTotalSeats() + "): ");
+                        int seatNumberToBook = sc.nextInt();
+
+                        boolean booked = trainToBook.bookSeat(seatNumberToBook, passengerName,
+                                                              age, preferredBerth, autoAssignBerth);
+                        if (booked) {
+                            successfulBookings++;
+                        }
+                    }
+
+                    if (successfulBookings > 0) {
+                        double totalFare = successfulBookings * trainToBook.getFarePerSeat();
+                        System.out.println("\nTotal seats booked: " + successfulBookings);
+                        System.out.println("Total fare: Rs." + totalFare);
+                    } else {
+                        System.out.println("No seats were booked.");
+                    }
+                    break;
+
+                case 3:
+                    System.out.println("\n--- Cancel Ticket ---");
+                    System.out.print("Enter train number: ");
+                    int trainNumForCancel = sc.nextInt();
+                    Train trainToCancel = findTrainByNumber(trains, trainNumForCancel);
+                    if (trainToCancel == null) {
+                        System.out.println("Invalid train number!");
+                        break;
+                    }
+                    System.out.print("Enter seat number to cancel (1 to " + trainToCancel.getTotalSeats() + "): ");
+                    int seatNumberToCancel = sc.nextInt();
+                    trainToCancel.cancelSeat(seatNumberToCancel);
+                    break;
+
+                case 4:
+                    System.out.println("\n--- View Passenger List ---");
+                    System.out.print("Enter train number: ");
+                    int trainNumForPassengers = sc.nextInt();
+                    Train trainForPassengers = findTrainByNumber(trains, trainNumForPassengers);
+                    if (trainForPassengers == null) {
+                        System.out.println("Invalid train number!");
+                    } else {
+                        trainForPassengers.showPassengerList();
+                    }
+                    break;
+
+                case 5:
+                    System.out.println("Exiting Railway Reservation System. Thank you!");
+                    break;
+
+                default:
+                    System.out.println("Invalid choice! Please enter a number between 1 and 5.");
+            }
+
+        } while (choice != 5);
+
+        sc.close();
+    }
+}
