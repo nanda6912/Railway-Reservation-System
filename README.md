@@ -1,6 +1,7 @@
 # Railway-Reservation-System
 
 A complete console-based railway ticket booking system built using Core Java, demonstrating OOP, arrays, data validation, multi-passenger booking, berth allocation, and clean menu-driven interaction.
+<br>
 📘 Project Overview
 
 The Railway Reservation System simulates core functionalities of a real railway booking system.
