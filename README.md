@@ -70,8 +70,9 @@ Railway-Reservation-System/
 │   └── RailwayReservationSystem.java
 │
 └── README.md
-
+<br>
 🛠️ Tech Stack
+<br>
 Technology	  ------- ----------------- Purpose
 Java (Core Java)	----------------------Application logic
 OOP	-------------------------------------Classes, objects, methods
