@@ -64,6 +64,7 @@ Shows name, age, berth type, and seat number
 🏗️ Project Structure
 <br>
 Railway-Reservation-System/
+<br>
 │
 ├── src/
 │   ├── Train.java
@@ -74,8 +75,13 @@ Railway-Reservation-System/
 🛠️ Tech Stack
 <br>
 Technology	  ------- ----------------- Purpose
+<br>
 Java (Core Java)	----------------------Application logic
+<br>
 OOP	-------------------------------------Classes, objects, methods
+<br>
 Arrays	--------------------------------Seat allocation, passenger storage
+<br>
 Scanner API----------------------------	User input
+<br>
 Menu-driven console ---------------------UI	Interaction
