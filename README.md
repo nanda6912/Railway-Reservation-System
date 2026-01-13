@@ -24,6 +24,7 @@ Users can:
 This project is ideal for Core Java practice, beginner-level projects, placement, and resume building.
 
 🧠 Features
+<br>
 🔹 1. Train & Seat Availability
 
 View all trains
