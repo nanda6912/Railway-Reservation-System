@@ -62,6 +62,7 @@ View all booked passengers
 Shows name, age, berth type, and seat number
 
 🏗️ Project Structure
+<br>
 Railway-Reservation-System/
 │
 ├── src/
