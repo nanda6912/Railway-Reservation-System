@@ -67,8 +67,11 @@ Railway-Reservation-System/
 <br>
 │
 ├── src/
+<br>
 │   ├── Train.java
+<br>
 │   └── RailwayReservationSystem.java
+<br>
 │
 └── README.md
 <br>
