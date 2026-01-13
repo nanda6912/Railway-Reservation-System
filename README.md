@@ -7,13 +7,19 @@ The Railway Reservation System simulates core functionalities of a real railway 
 Users can:
 
 ✔ View available trains
+<br>
 ✔ Check seat availability
+<br>
 ✔ Book multiple tickets in a single transaction
+<br>
 ✔ Enter passenger name, age, and berth preference
+<br>
 ✔ Auto-allocate berth based on age if not chosen
+<br>
 ✔ Cancel booked tickets
+<br>
 ✔ View passenger list with berth and age details
-
+<br>
 This project is ideal for Core Java practice, beginner-level projects, placement, and resume building.
 
 🧠 Features
